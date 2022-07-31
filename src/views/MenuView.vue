@@ -5,7 +5,7 @@ main
     ul
       li(
         v-for="(label, index) in labels"
-        :class="{ active: index === this.activeLinkIndex }"
+        :class="{ active: index === activeLinkIndex }"
         @mouseover="activeLinkIndex = index"
       ) 
         router-link(:to=" `/${label}`") {{ label.toUpperCase() }}

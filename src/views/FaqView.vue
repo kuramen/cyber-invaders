@@ -2,11 +2,11 @@
 main
   .questions
     .cyber-dialog
-      p(v-dialog :data-text="cyberSpeech" :data-displayed="this.cyberSpeechIsDisplayed")
+      p(v-dialog :data-text="cyberSpeech" :data-displayed="cyberSpeechIsDisplayed")
     .cyber-invader
       img(alt="cyber-invader" src="/img/cyber-invader.png")
   .dialog
-    ul(v-show="isCyberAskingQuestion && this.cyberSpeechIsDisplayed")
+    ul(v-show="isCyberAskingQuestion && cyberSpeechIsDisplayed")
       li(
         v-for="(dialog, index) in dialogs"
         :class="{ active: index === activeQuestionIndex }"

@@ -3,7 +3,7 @@ main
   ul
     li(
       v-for="(step, index) in roadmap"
-      :style="{ 'background-image': `url(/img/${step.background}.png)`, transform: `translateX(-${100 * this.activeStepIndex}%)`, left: `${100 * index}%`, color: step.color }"
+      :style="{ 'background-image': `url(/img/${step.background}.png)`, transform: `translateX(-${100 * activeStepIndex}%)`, left: `${100 * index}%`, color: step.color }"
     )
       h1 {{ step.date }}
       p {{ step.description }}
