@@ -11,7 +11,13 @@ main
         v-for="(dialog, index) in dialogs"
         :class="{ active: index === activeQuestionIndex }"
       ) {{ dialog.question }}
-    p.response(v-show="!isCyberAskingQuestion" v-dialog :data-text="answer" :data-displayed="isCyberAskingQuestion || answerIsDisplayed")
+    p.response(
+      v-show="!isCyberAskingQuestion"
+      v-dialog
+      :data-text="answer"
+      :data-displayed="isCyberAskingQuestion || answerIsDisplayed"
+      :class="{ large: answer.length > 290 }"
+    )
 </template>
 
 <script setup>
@@ -34,20 +40,29 @@ const dialogs = ref([
   {
     question: "How can I join the presale ?",
     answer:
-      "To join our presale you must earn the rank of Boatswain (WL2), Chiefmate (WL1) or Corsair (WL1).",
+      "To join our presale, you must reach the rank of Cyber Captain (OG) or Cyber Soldiers (WL).",
   },
   {
-    question: "Why should I mint a cyber invader ?",
+    question: "Why should I mint a Cyber Invader ?",
     answer:
-      "Besides having the coolest PFP in the NFT space, holding a Lost Pirates will give you immediate access to AR-powered treasure hunts with prizes in SOL and extensive/exclusive artistic content.",
+      "Beyond owning one of the most magnificent pieces of artwork in the NFT ecosystem on Solana, owning a Cyber Invaders will allow you to participate in one of the craziest missions of your life: invading the Solana blockchain. You will participate in various missions, mint NFTs until the final goal...",
   },
   {
     question: "Where can I buy the NFT ?",
-    answer: "The collection will be launched exclusively on Magic Eden.",
+    answer: "There will be (no more, no less) 3,333 NFTs in the collection.",
   },
   {
-    question: "How big is the collection ?",
+    question: "How many Cyber Invaders will participate in the invasion ?",
     answer: "The collection consists of 3333 cyber invaders.",
+  },
+  {
+    question: "How much will the mint cost ?",
+    answer:
+      "For the pre-sale, the price per mint will be 0,15 SOL. For the public sale, the price of the mint will be 0,3 SOL.",
+  },
+  {
+    question: "When can I mint my NFT ?",
+    answer: "The mint date will be announced soon.",
   },
 ]);
 const answerIsDisplayed = ref(false);
@@ -204,6 +219,10 @@ main {
       margin: 2%;
       text-align: justify;
       font-size: 1.1em;
+
+      &.large {
+        font-size: 0.9em;
+      }
     }
   }
 }
