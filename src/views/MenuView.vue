@@ -16,7 +16,7 @@ import { emitter } from "@/composables/useEvent";
 import { ref, onMounted, onUnmounted } from "vue";
 import router from "@/router";
 
-const labels = ref(["manifesto", "roadmap", "faq", "credits"]);
+const labels = ref(["play", "manifesto", "roadmap", "faq", "credits"]);
 const activeLinkIndex = ref(0);
 
 const handleControl = (control) => {
