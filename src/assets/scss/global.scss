@@ -30,6 +30,8 @@ html {
     font-size: 16px;
     width: 100%;
     height: 100%;
+    background-image: url('/img/sky-background.svg');
+    overflow: hidden;
 }
 
 *,
@@ -57,12 +59,7 @@ a {
 body,
 #app {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-body {
-    background-image: url('/img/sky-background.svg');
+    height: 100%;  
 }
 
 ol,
