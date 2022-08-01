@@ -1,21 +1,28 @@
 <template lang="pug">
 main
-    p.score {{ `SCORE : ${results}/${alienInvaders.length}` }}
-    h1.result(v-show="resultSentence") {{ resultSentence }}
+    p.score {{ `SCORE : ${results}/${total}` }}
+    .result(v-show="resultSentence") 
+      h1(v-show="resultSentence") {{ resultSentence }}
+      ul
+        li(:class="{ active: !isBack }") Restart
+        li(:class="{ active: isBack }") Back
     .grid
         div.square(v-for="squareClass of squares" :class="squareClass")
 </template>
 
 <script>
 import { emitter } from "@/composables/useEvent";
+import router from "@/router";
+
 const squareProps = {
   invader: false,
   shooter: false,
   laser: false,
   boom: false,
 };
-const width = 20;
-const height = 20;
+const width = 10;
+const height = 10;
+const alienConfig = [2, 4, 6, 13, 15, 22, 24, 26];
 
 export default {
   data() {
@@ -26,40 +33,65 @@ export default {
       direction: 1,
       invadersId: false,
       goingRight: true,
-      aliensRemoved: [],
       results: 0,
       lasers: [],
-      alienInvaders: [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
-        30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-      ],
+      debug: false,
+      total: Infinity,
+      alienInvaders: [],
       squares: Array(width * height)
         .fill(null)
         .map(() => {
           return { ...squareProps };
         }),
       resultSentence: null,
+      isBack: 0,
     };
   },
   mounted() {
-    this.squares[this.currentShooterIndex].shooter = true;
-
-    for (const i in this.alienInvaders) {
-      if (!this.aliensRemoved.includes(i)) {
-        this.squares[this.alienInvaders[i]].invader = true;
-      }
-    }
-
-    emitter.on("control", this.moveShooter);
-    emitter.on("control", this.shoot);
-
-    this.invadersId = setInterval(this.move, 600);
+    emitter.on("control", this.handleControl);
+    this.start();
   },
   methods: {
+    start() {
+      this.squares[this.currentShooterIndex].shooter = false;
+      this.squares[this.currentShooterIndex].boom = false;
+      for (const i in this.alienInvaders) {
+        this.squares[this.alienInvaders[i]].invader = false;
+      }
+
+      this.alienInvaders = [...alienConfig];
+      this.currentShooterIndex = width * height - Math.floor(width / 2);
+      this.total = this.alienInvaders.length;
+      this.resultSentence = null;
+
+      this.squares[this.currentShooterIndex].shooter = true;
+      for (const i in this.alienInvaders) {
+        this.squares[this.alienInvaders[i]].invader = true;
+      }
+
+      this.invadersId = setInterval(this.move, 600);
+    },
+    handleControl(control) {
+      if (control === "b") router.replace({ name: "menu" });
+      if (this.resultSentence) {
+        switch (control) {
+          case "left":
+          case "right":
+            this.isBack = !this.isBack;
+            break;
+          case "a":
+            if (this.isBack) router.replace({ name: "menu" });
+            else this.start();
+        }
+      } else {
+        this.shoot(control);
+        this.moveShooter(control);
+      }
+    },
     move() {
       this.moveShooter();
-      this.moveInvaders();
       this.moveLasers();
+      this.moveInvaders();
       this.checkEnd();
     },
     moveShooter(control) {
@@ -88,18 +120,18 @@ export default {
       }
 
       if (rightEdge && this.goingRight) {
+        this.direction = -1;
+        this.goingRight = false;
         for (const i in this.alienInvaders) {
           this.alienInvaders[i] += this.width + 1;
-          this.direction--;
-          this.goingRight = false;
         }
       }
 
       if (leftEdge && !this.goingRight) {
+        this.direction = 1;
+        this.goingRight = true;
         for (const i in this.alienInvaders) {
           this.alienInvaders[i] += this.width - 1;
-          this.direction = 1;
-          this.goingRight = true;
         }
       }
 
@@ -109,12 +141,8 @@ export default {
 
       // Draw all invaders
       for (const i in this.alienInvaders) {
-        if (!this.aliensRemoved.includes(i)) {
-          this.squares[this.alienInvaders[i]].invader = true;
-        }
+        this.squares[this.alienInvaders[i]].invader = true;
       }
-
-      this.checkEnd();
     },
     shoot(control) {
       switch (control) {
@@ -127,6 +155,7 @@ export default {
     checkEnd() {
       const square = this.squares[this.currentShooterIndex];
       if (square.invader && square.shooter) {
+        square.boom = true;
         this.resultSentence = "GAME OVER";
         clearInterval(this.invadersId);
       }
@@ -137,7 +166,7 @@ export default {
           clearInterval(this.invadersId);
         }
       }
-      if (this.aliensRemoved.length === this.alienInvaders.length) {
+      if (this.total === this.results) {
         this.resultSentence = "YOU WIN";
         clearInterval(this.invadersId);
       }
@@ -159,9 +188,9 @@ export default {
             nextSquare.boom = true;
 
             this.lasers.splice(index, 1);
-            const alienRemoved = this.alienInvaders.indexOf(nextLaserIndex);
-            this.aliensRemoved.push(alienRemoved);
-            debugger
+            this.alienInvaders = this.alienInvaders.filter(
+              (x) => nextLaserIndex !== x
+            );
             this.results++;
 
             setTimeout(() => (nextSquare.boom = false), 300);
@@ -191,16 +220,43 @@ main {
     right: 3%;
   }
 
-  h1.result {
-    font-family: "Squartiqa", serif;
-    color: white;
+  .result {
     position: absolute;
-    font-size: 3em;
     width: 100%;
     margin-left: -3%;
     top: 50%;
     text-align: center;
     transform: translateY(-50%);
+
+    h1 {
+      font-family: "Squartiqa", serif;
+      color: white;
+      font-size: 3em;
+    }
+
+    ul {
+      display: flex;
+      justify-content: center;
+      gap: 10%;
+      flex-direction: row;
+      margin-top: 5%;
+
+      li {
+        font-size: 1em;
+        font-family: "Minecraft", serif;
+        color: white;
+        position: relative;
+
+        &.active::before {
+          position: absolute;
+          line-height: 100%;
+          top: 50%;
+          transform: translateY(-50%);
+          content: "▶";
+          right: calc(100% + 10px);
+        }
+      }
+    }
   }
 
   .grid {
@@ -212,24 +268,24 @@ main {
   }
 
   .grid .square {
-    width: 5%;
-    height: 5%;
+    width: 10%;
+    height: 10%;
+    background-size: cover;
 
     &.invader {
-      background-color: purple;
-      border-radius: 10px;
+      background-image: url(/img/alien.png);
     }
 
     &.shooter {
-      background-color: green;
+      background-image: url(/img/spaceship.png);
     }
 
     &.laser {
-      background-color: orange;
+      background-image: url(/img/laser.png);
     }
 
     &.boom {
-      background-color: red;
+      background-image: url(/img/explosion.png);
     }
   }
 }
