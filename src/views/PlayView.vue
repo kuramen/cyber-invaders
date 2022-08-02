@@ -44,7 +44,7 @@ export default {
           return { ...squareProps };
         }),
       resultSentence: null,
-      isBack: 0,
+      isBack: false,
     };
   },
   mounted() {
@@ -58,11 +58,17 @@ export default {
       for (const i in this.alienInvaders) {
         this.squares[this.alienInvaders[i]].invader = false;
       }
+      for (const i in this.lasers) {
+        this.squares[this.lasers[i]].laser = false;
+      }
 
       this.alienInvaders = [...alienConfig];
       this.currentShooterIndex = width * height - Math.floor(width / 2);
+      this.lasers = [];
       this.total = this.alienInvaders.length;
+      this.results = 0;
       this.resultSentence = null;
+      this.isBack = false;
 
       this.squares[this.currentShooterIndex].shooter = true;
       for (const i in this.alienInvaders) {
@@ -81,18 +87,21 @@ export default {
             break;
           case "a":
             if (this.isBack) router.replace({ name: "menu" });
-            else this.start();
+            else {
+              this.start();
+            }
         }
       } else {
         this.shoot(control);
         this.moveShooter(control);
       }
     },
-    move() {
-      this.moveShooter();
-      this.moveLasers();
-      this.moveInvaders();
-      this.checkEnd();
+    async move() {
+      await this.moveShooter();
+      await this.moveLasers();
+      await this.moveInvaders();
+      await this.checkCollision();
+      await this.checkEnd();
     },
     moveShooter(control) {
       this.squares[this.currentShooterIndex].shooter = false;
@@ -107,6 +116,7 @@ export default {
           break;
       }
       this.squares[this.currentShooterIndex].shooter = true;
+      return Promise.resolve();
     },
     moveInvaders() {
       const leftEdge = this.alienInvaders[0] % this.width === 0;
@@ -143,12 +153,16 @@ export default {
       for (const i in this.alienInvaders) {
         this.squares[this.alienInvaders[i]].invader = true;
       }
+
+      return Promise.resolve();
     },
     shoot(control) {
+      const max = width * height - width - 2;
+      const lastLaserIndex = this.lasers[this.lasers.length - 1];
       switch (control) {
         case "a":
         case "up":
-          if (!this.lasers.includes(this.currentShooterIndex))
+          if (!lastLaserIndex || lastLaserIndex < max)
             this.lasers.push(this.currentShooterIndex);
       }
     },
@@ -170,6 +184,8 @@ export default {
         this.resultSentence = "YOU WIN";
         clearInterval(this.invadersId);
       }
+
+      return Promise.resolve();
     },
     moveLasers() {
       for (const index in this.lasers) {
@@ -179,27 +195,38 @@ export default {
         const nextSquare = this.squares[nextLaserIndex];
 
         if (square && nextSquare) {
-          this.lasers[index] = nextLaserIndex;
           nextSquare.laser = true;
           square.laser = false;
-          if (nextSquare.invader) {
-            nextSquare.laser = false;
-            nextSquare.invader = false;
-            nextSquare.boom = true;
-
-            this.lasers.splice(index, 1);
-            this.alienInvaders = this.alienInvaders.filter(
-              (x) => nextLaserIndex !== x
-            );
-            this.results++;
-
-            setTimeout(() => (nextSquare.boom = false), 300);
-          }
+          this.lasers[index] = nextLaserIndex;
         } else if (square) {
           this.lasers.splice(index, 1);
           square.laser = false;
+        } else {
+          this.lasers.splice(index, 1);
         }
       }
+
+      return Promise.resolve();
+    },
+    checkCollision() {
+      for (const index in this.lasers) {
+        const square = this.squares[this.lasers[index]];
+        if (square?.invader) {
+          square.laser = false;
+          square.invader = false;
+          square.boom = true;
+
+          // Remove laser and alienInvader
+          this.alienInvaders = this.alienInvaders.filter(
+            (x) => this.lasers[index] !== x
+          );
+          this.lasers.splice(index, 1);
+          this.results++;
+
+          setTimeout(() => (square.boom = false), 300);
+        }
+      }
+      return Promise.resolve();
     },
   },
 };
