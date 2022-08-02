@@ -13,6 +13,10 @@ main
 <script>
 import { emitter } from "@/composables/useEvent";
 import router from "@/router";
+import invaderKilledAudio from "@/assets/sound/invaderKilled.mp3";
+import shootAudio from "@/assets/sound/shoot.mp3";
+import winAudio from "@/assets/sound/win.mp3";
+import gameOverAudio from "@/assets/sound/gameOver.mp3";
 
 const squareProps = {
   invader: false,
@@ -23,6 +27,11 @@ const squareProps = {
 const width = 10;
 const height = 10;
 const alienConfig = [2, 4, 6, 13, 15, 22, 24, 26];
+
+const invaderKilled = new Audio(invaderKilledAudio);
+const shoot = new Audio(shootAudio);
+const win = new Audio(winAudio);
+const gameOver = new Audio(gameOverAudio);
 
 export default {
   data() {
@@ -162,8 +171,10 @@ export default {
       switch (control) {
         case "a":
         case "up":
-          if (!lastLaserIndex || lastLaserIndex < max)
+          if (!lastLaserIndex || lastLaserIndex < max) {
             this.lasers.push(this.currentShooterIndex);
+            shoot.play();
+          }
       }
     },
     checkEnd() {
@@ -171,17 +182,20 @@ export default {
       if (square.invader && square.shooter) {
         square.boom = true;
         this.resultSentence = "GAME OVER";
+        gameOver.play();
         clearInterval(this.invadersId);
       }
 
       for (const i in this.alienInvaders) {
         if (this.alienInvaders[i] > this.squares.length) {
           this.resultSentence = "GAME OVER";
+          gameOver.play();
           clearInterval(this.invadersId);
         }
       }
       if (this.total === this.results) {
         this.resultSentence = "YOU WIN";
+        win.play();
         clearInterval(this.invadersId);
       }
 
@@ -215,6 +229,7 @@ export default {
           square.laser = false;
           square.invader = false;
           square.boom = true;
+          invaderKilled.play();
 
           // Remove laser and alienInvader
           this.alienInvaders = this.alienInvaders.filter(
