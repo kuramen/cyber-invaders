@@ -79,12 +79,12 @@ main {
       }
 
       &::before {
-        content: "\25B6";
+        content: "\25B6\FE0E";
         right: calc(100% + 20px);
       }
 
       &::after {
-        content: "\25C0";
+        content: "\25C0\FE0E";
         left: calc(100% + 20px);
       }
     }
