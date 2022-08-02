@@ -22,6 +22,7 @@ button {
   width: $button-size;
   transform: rotate(-15deg);
   cursor: pointer;
+  position: relative;
 
   &.a,
   &.b {
@@ -33,8 +34,9 @@ button {
       font-size: 23px;
       font-family: "Arial Black";
       color: $game-boy-primary-title-color;
-      top: 80%;
-      left: 0%;
+      transform: rotate(-10deg);
+      top: 120%;
+      left: 50%;
     }
   }
 
@@ -54,7 +56,7 @@ button {
 
   label {
     display: block;
-    position: relative;
+    position: absolute;
   }
 }
 </style>

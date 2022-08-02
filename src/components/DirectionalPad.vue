@@ -39,6 +39,7 @@ export default {
     display: block;
     position: relative;
     background-color: $game-boy-secondary-button-color;
+    color: black;
     width: $button-size;
     height: $button-size;
     cursor: pointer;
