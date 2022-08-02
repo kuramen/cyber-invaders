@@ -109,12 +109,14 @@ const handleControl = (control) => {
       scroll.value = 0;
       break;
     case "down":
+    case "a":
       if (
         isOutside(
           `step-${activeStepIndex.value}`,
           `step-${activeStepIndex.value}-p-${
             roadmap.value[activeStepIndex.value].paragraphs.length - 1
-          }`, true
+          }`,
+          true
         )
       )
         roadmap.value[activeStepIndex.value].scroll -= 10;
