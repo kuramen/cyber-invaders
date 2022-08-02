@@ -23,6 +23,7 @@ button {
   transform: rotate(-15deg);
   cursor: pointer;
   position: relative;
+  user-select: none;
 
   &.a,
   &.b {

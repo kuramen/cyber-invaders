@@ -43,6 +43,7 @@ export default {
     width: $button-size;
     height: $button-size;
     cursor: pointer;
+    user-select: none;
 
     &.center {
       left: $button-size;
