@@ -194,12 +194,12 @@ main ul {
     }
 
     &::before {
-      content: "◀";
+      content: "\25C0\FE0E";
       left: 2%;
     }
 
     &::after {
-      content: "▶";
+      content: "\25B6\FE0E";
       right: 2%;
     }
   }

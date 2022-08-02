@@ -75,7 +75,6 @@ main {
         line-height: 100%;
         top: 50%;
         transform: translateY(-50%);
-        text-decoration: none;
       }
 
       &::before {

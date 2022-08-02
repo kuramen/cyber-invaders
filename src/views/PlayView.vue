@@ -279,7 +279,7 @@ main {
           line-height: 100%;
           top: 50%;
           transform: translateY(-50%);
-          content: "▶";
+          content: "\25B6\FE0E";
           right: calc(100% + 10px);
         }
       }

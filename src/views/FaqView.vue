@@ -205,7 +205,7 @@ main {
         text-align: left;
 
         &.active::before {
-          content: "▶";
+          content: "\25B6\FE0E";
           position: absolute;
           line-height: 100%;
           top: 50%;

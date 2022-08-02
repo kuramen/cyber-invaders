@@ -155,7 +155,7 @@ main {
       position: absolute;
       bottom: 2%;
       right: 5%;
-      content: "▼";
+      content: "\25BC\FE0E";
       animation: flickerAnimation 0.5s infinite;
     }
     &.with-cursor::after {
