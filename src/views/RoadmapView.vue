@@ -8,12 +8,12 @@ main
     )
       h1(
         :id="`step-${index}-h1`"
-        :style="{ transform: `translateY(${scroll}px)` }"
+        :style="{ transform: `translateY(${step.scroll}px)` }"
       ) {{ step.date }}
-      h2(:style="{ transform: `translateY(${scroll}px)` }") {{ step.title }}
+      h2(:style="{ transform: `translateY(${step.scroll}px)` }") {{ step.title }}
       p(
         v-for="(paragrah, i) of step.paragraphs"
-        :style="{ transform: `translateY(${scroll}px)` }"
+        :style="{ transform: `translateY(${step.scroll}px)` }"
         :id="`step-${index}-p-${i}`"
       ) {{ paragrah }}
 </template>
@@ -23,7 +23,6 @@ import { emitter } from "@/composables/useEvent";
 import { ref, onMounted, onUnmounted } from "vue";
 import router from "@/router";
 
-const scroll = ref(0);
 const roadmap = ref([
   {
     date: "June 2022",
@@ -35,6 +34,7 @@ const roadmap = ref([
     ],
     background: "blue-cyber",
     color: "white",
+    scroll: 0,
   },
   {
     date: "August 2022",
@@ -46,6 +46,7 @@ const roadmap = ref([
     ],
     background: "light-city",
     color: "black",
+    scroll: 0,
   },
   {
     date: "October 2022",
@@ -58,6 +59,7 @@ const roadmap = ref([
     ],
     background: "purple-cyber",
     color: "white",
+    scroll: 0,
   },
   {
     date: "December 2022",
@@ -68,6 +70,7 @@ const roadmap = ref([
     ],
     background: "punk-city",
     color: "white",
+    scroll: 0,
   },
   {
     date: "December 2022",
@@ -79,6 +82,7 @@ const roadmap = ref([
     ],
     background: "gray-city",
     color: "black",
+    scroll: 0,
   },
 ]);
 const activeStepIndex = ref(0);
@@ -112,7 +116,7 @@ const handleControl = (control) => {
           }`, true
         )
       )
-        scroll.value -= 10;
+        roadmap.value[activeStepIndex.value].scroll -= 10;
       break;
     case "up":
       if (
@@ -121,7 +125,7 @@ const handleControl = (control) => {
           `step-${activeStepIndex.value}-h1`
         )
       )
-        scroll.value += 10;
+        roadmap.value[activeStepIndex.value].scroll += 10;
       break;
     case "b":
       router.replace({ name: "menu" });
