@@ -41,6 +41,11 @@ const sections = ref([
         text: "On their planet, the Cyber Invaders have obtained signs of life from Earth thanks to signals sent from the Solana blockchain. That's why they send 3,333 Invaders to invade the earth and save the Solana blockchain.",
         displayed: false,
       },
+    ],
+  },
+  {
+    name: "history",
+    paragraphs: [
       {
         text: "Among the 3333 Invaders, there are 50% men and % women. At least, that was the case at the beginning. During the initial invasion training, several Invaders found themselves affected. Some came back unchanged, but some got stuck in the Matrix of the Solana blockchain, others turned into Aliens, and others joined the ranks of the robots.",
         displayed: false,
@@ -145,7 +150,7 @@ main {
 
     p {
       font-family: "Minecraft", serif;
-      font-size: 0.7em;
+      font-size: 1em;
       text-align: justify;
       text-indent: 6%;
     }
