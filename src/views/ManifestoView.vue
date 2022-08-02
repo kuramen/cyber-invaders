@@ -21,7 +21,7 @@ const sections = ref([
     name: "project",
     paragraphs: [
       {
-        text: "Cyber Invaders is an exclusive collection of 2,500 NFTs, launched on the Solana blockchain by a top team of NFT collectors, designers, artist and community builders.",
+        text: "Cyber Invaders is an exclusive collection of 3,333 NFTs, launched on the Solana blockchain by a top team of NFT collectors, designers, artist and community builders.",
         displayed: false,
       },
       {
