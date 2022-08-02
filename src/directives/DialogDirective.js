@@ -36,7 +36,9 @@ export default {
 
     const observer = new MutationObserver(callback);
     observer.observe(el, { attributes: true });
-    if (el.dataset.displayed === "true") el.textContent = el.dataset.text;
+    if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))
+      el.textContent = el.dataset.text;
+    else if (el.dataset.displayed === "true") el.textContent = el.dataset.text;
     else if (el.dataset.text) revealText(el.dataset.text);
   },
 };
