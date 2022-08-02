@@ -75,16 +75,15 @@ main {
         line-height: 100%;
         top: 50%;
         transform: translateY(-50%);
-        font-family: "Arial Black", serif;
       }
 
       &::before {
-        content: "▶";
+        content: "\25B6";
         right: calc(100% + 20px);
       }
 
       &::after {
-        content: "◀";
+        content: "\25C0";
         left: calc(100% + 20px);
       }
     }
