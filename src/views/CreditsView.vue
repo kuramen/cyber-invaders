@@ -48,7 +48,7 @@ main {
   justify-content: center;
   text-align: center;
   gap: $gap;
-  background-image: url("/img/green-city.png");
+  background-image: url(@/assets/img/green-city.png);
   background-size: cover;
 
   h1 {

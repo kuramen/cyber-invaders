@@ -4,7 +4,7 @@ main
     .cyber-dialog
       p(v-dialog :data-text="cyberSpeech" :data-displayed="cyberSpeechIsDisplayed")
     .cyber-invader
-      img(alt="cyber-invader" src="/img/cyber-invader.png")
+      img(alt="cyber-invader" src="@/assets/img/cyber-invader.png")
   .dialog
     ul(v-show="isCyberAskingQuestion && cyberSpeechIsDisplayed")
       li(
@@ -141,7 +141,7 @@ main {
   flex-direction: column;
   justify-content: center;
   gap: $gap;
-  background-image: url("/img/purple-city.png");
+  background-image: url(@/assets/img/purple-city.png);
   background-size: cover;
 
   .questions {
@@ -162,7 +162,7 @@ main {
     }
 
     .cyber-invader {
-      background-image: url("/img/green-cyber.png");
+      background-image: url(@/assets/img/green-cyber.png);
       background-size: cover;
       img {
         width: auto;

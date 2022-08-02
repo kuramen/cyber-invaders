@@ -3,7 +3,8 @@ main
   ul
     li(
       v-for="(step, index) in roadmap"
-      :style="{ 'background-image': `url(/img/${step.background}.png)`, transform: `translateX(-${100 * activeStepIndex}%)`, left: `${100 * index}%`, color: step.color }"
+      :class="[step.background]"
+      :style="{ transform: `translateX(-${100 * activeStepIndex}%)`, left: `${100 * index}%`, color: step.color }"
       :id="`step-${index}`"
     )
       h1(
@@ -162,6 +163,23 @@ main ul {
     transition: all 1s ease;
     padding: 8%;
     overflow: hidden;
+
+    &.blue-cyber {
+      background-image: url(@/assets/img/blue-cyber.png);
+    }
+
+    &.light-city {
+      background-image: url(@/assets/img/light-city.png);
+    }
+    &.purple-cyber {
+      background-image: url(@/assets/img/purple-cyber.png);
+    }
+    &.punk-city {
+      background-image: url(@/assets/img/punk-city.png);
+    }
+    &.gray-city {
+      background-image: url(@/assets/img/gray-city.png);
+    }
 
     h1 {
       font-size: 1.5em;

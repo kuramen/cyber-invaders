@@ -52,7 +52,7 @@ main {
   justify-content: center;
   text-align: center;
   gap: $gap;
-  background-image: url("/img/black-galaxy.png");
+  background-image: url(@/assets/img/black-galaxy.png);
   background-size: cover;
 
   h1 {

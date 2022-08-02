@@ -40,7 +40,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background-image: url("/img/sky-background.svg");
+  background-image: url(@/assets/img/sky-background.svg);
   position: relative;
 
   .socials {

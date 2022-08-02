@@ -234,7 +234,7 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  background-image: url("/img/night-sky.png");
+  background-image: url(@/assets/img/night-sky.png);
   background-size: cover;
   padding: 8% 3% 3% 3%;
   position: relative;
@@ -300,19 +300,19 @@ main {
     background-size: cover;
 
     &.invader {
-      background-image: url(/img/alien.png);
+      background-image: url(@/assets/img/alien.png);
     }
 
     &.shooter {
-      background-image: url(/img/spaceship.png);
+      background-image: url(@/assets/img/spaceship.png);
     }
 
     &.laser {
-      background-image: url(/img/laser.png);
+      background-image: url(@/assets/img/laser.png);
     }
 
     &.boom {
-      background-image: url(/img/explosion.png);
+      background-image: url(@/assets/img/explosion.png);
     }
   }
 }

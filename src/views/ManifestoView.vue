@@ -126,7 +126,7 @@ main {
   justify-content: center;
   text-align: center;
   gap: $gap;
-  background-image: url("/img/blue-city.png");
+  background-image: url(@/assets/img/blue-city.png);
   background-size: cover;
 
   .section {
