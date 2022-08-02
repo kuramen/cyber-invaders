@@ -45,7 +45,7 @@ main {
   text-align: center;
   gap: $gap;
   background-image: url("/img/green-city.png");
-  background-size: contain;
+  background-size: cover;
 
   h1 {
     font-family: "Squartiqa", serif;

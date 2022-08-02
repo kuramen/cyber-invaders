@@ -142,7 +142,7 @@ main {
   justify-content: center;
   gap: $gap;
   background-image: url("/img/purple-city.png");
-  background-size: contain;
+  background-size: cover;
 
   .questions {
     display: flex;
@@ -163,7 +163,7 @@ main {
 
     .cyber-invader {
       background-image: url("/img/green-cyber.png");
-      background-size: contain;
+      background-size: cover;
       img {
         width: auto;
         display: block;

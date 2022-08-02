@@ -154,7 +154,7 @@ main ul {
     display: flex;
     flex-direction: column;
     position: absolute;
-    background-size: contain;
+    background-size: cover;
     transition: all 1s ease;
     padding: 8%;
     overflow: hidden;

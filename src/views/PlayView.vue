@@ -235,7 +235,7 @@ export default {
 <style lang="scss" scoped>
 main {
   background-image: url("/img/night-sky.png");
-  background-size: contain;
+  background-size: cover;
   padding: 8% 3% 3% 3%;
   position: relative;
 

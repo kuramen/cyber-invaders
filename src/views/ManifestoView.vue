@@ -127,7 +127,7 @@ main {
   text-align: center;
   gap: $gap;
   background-image: url("/img/blue-city.png");
-  background-size: contain;
+  background-size: cover;
 
   .section {
     padding: 4%;
