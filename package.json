@@ -24,6 +24,7 @@
     "pug": "^3.0.2",
     "sass": "^1.52.3",
     "vite": "^2.9.12",
+    "vite-plugin-imagemin": "^0.6.1",
     "vue-eslint-parser": "^9.0.3"
   }
 }
