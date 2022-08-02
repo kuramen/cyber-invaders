@@ -52,6 +52,59 @@ const sections = ref([
       },
     ],
   },
+  {
+    name: "adventure",
+    paragraphs: [
+      {
+        text: "A great journey is about to begin for Cyber Invaders.",
+        displayed: false,
+      },
+      {
+        text: "There are many paths that lead to an infinity of different history. Each Invaders will become the creator of his own destiny. 3,333 Cyber Invaders, 3,333 different paths, 1 single objective: to be the first to set foot on the world of Solana. Make the right choices and you will emerge victorious.",
+        displayed: false,
+      },
+    ],
+  },
+  {
+    name: "adventure",
+    paragraphs: [
+      {
+        text: "There are 3 paths that will lead you to 3 different stories. At the beginning, you will have a choice to make from 3 options, which will determine which path you take. Each (delisted) Cyber Invaders will be eligible to take all three paths, one at a time. At the end of each path, you will receive a part of the ship that will lead you to the Solana blockchain.",
+        displayed: false,
+      },
+    ],
+  },
+  {
+    name: "adventure",
+    paragraphs: [
+      {
+        text: "On your way, you will have several missions to complete. Each mission will be a free mint for the holders, acting as a certificate of achievement. Once you have completed all your missions, you will receive one of the 3 pieces of the ship. But this one, alone, will not be a sufficient element to allow you to go on the Solana blockchain.",
+        displayed: false,
+      },
+    ],
+  },
+  {
+    name: "adventure",
+    paragraphs: [
+      {
+        text: "The 3 paths are not part of the same story. Once your 1st path is selected, only a special NFT will give you the possibility to change path. This NFT is a time travel zapper, it is single use and will be minable only when you have completed your 1st path. Don't worry, it will also be possible to get it in the secondary market places.",
+        displayed: false,
+      },
+      {
+        text: "Those who have managed to gather the three parts of the ship will have the possibility to choose the destiny of their Cyber Invaders. Three mutations will be offered, which will remain secret until one of you manages to unlock it. Once again, the mint is not the only way to get a ship part, it is also possible to buy them on the secondary market.",
+        displayed: false,
+      },
+    ],
+  },
+  {
+    name: "adventure",
+    paragraphs: [
+      {
+        text: "Those who have managed to gather the three parts of the ship will have the possibility to choose the destiny of their Cyber Invaders. Three mutations will be offered, which will remain secret until one of you manages to unlock it. Once again, the mint is not the only way to get a ship part, it is also possible to buy them on the secondary market.",
+        displayed: false,
+      },
+    ],
+  },
 ]);
 
 const activeSectionIndex = ref(0);
