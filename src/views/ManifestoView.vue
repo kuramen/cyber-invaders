@@ -38,11 +38,11 @@ const sections = ref([
         displayed: false,
       },
       {
-        text: "On their planet, the Cyber Invaders have obtained signs of life from Earth thanks to signals sent from the Solana blockchain. That's why they send 2,500 Invaders to invade the earth and save the Solana blockchain.",
+        text: "On their planet, the Cyber Invaders have obtained signs of life from Earth thanks to signals sent from the Solana blockchain. That's why they send 3,333 Invaders to invade the earth and save the Solana blockchain.",
         displayed: false,
       },
       {
-        text: "Among the 2500 Invaders, there are 1250 men and 1250 women. At %; least, that was the case at the beginning. During the initial invasion training, several Invaders found themselves affected. Some came back unchanged, but some got stuck in the Matrix of the Solana blockchain, others turned into Aliens, and others joined the ranks of the robots.",
+        text: "Among the 3333 Invaders, there are 50% men and % women. At least, that was the case at the beginning. During the initial invasion training, several Invaders found themselves affected. Some came back unchanged, but some got stuck in the Matrix of the Solana blockchain, others turned into Aliens, and others joined the ranks of the robots.",
         displayed: false,
       },
     ],

@@ -60,6 +60,10 @@ export default {
     emitter.on("control", this.handleControl);
     this.start();
   },
+  unmounted() {
+    emitter.off("control", this.handleControl);
+    if (this.invadersId) clearInterval(this.invadersId);
+  },
   methods: {
     start() {
       this.squares[this.currentShooterIndex].shooter = false;

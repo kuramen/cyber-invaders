@@ -6,15 +6,21 @@
     a(v-for="social in socials" :href="`${social.url}/${social.account}`" target="_blank")
       svg.logo(xmlns="http://www.w3.org/2000/svg" :viewBox="social.viewBox")
         path(:d="social.dPath")
+  button.music(:class="{ 'play': playMusic }" @click="playMusic = !playMusic")
+
 </template>
 
 <script>
 import GameBoy from "@/layout/GameBoy.vue";
+import themeAudio from "@/assets/sound/theme.mp3";
+
+const theme = new Audio(themeAudio);
 
 export default {
   components: { GameBoy },
   data() {
     return {
+      playMusic: false,
       socials: {
         twitter: {
           url: "https://www.twitter.com",
@@ -33,6 +39,11 @@ export default {
       },
     };
   },
+  watch: {
+    playMusic(value) {
+      theme[value ? "play" : "pause"]();
+    },
+  },
 };
 </script>
 
@@ -43,16 +54,33 @@ export default {
   background-image: url(@/assets/img/sky-background.svg);
   position: relative;
 
+  button.music {
+    position: absolute;
+    font-size: 2.8em;
+    background-color: transparent;
+    bottom: 1%;
+    left: 3%;
+
+    &::after {
+      content: "\25B6\FE0E";
+      color: white;
+      cursor: pointer;
+    }
+
+    &:hover::after {
+      color: pink;
+    }
+
+    &.play::after {
+      content: "\2759\FE0E\2759\FE0E";
+    }
+  }
   .socials {
     position: absolute;
     display: flex;
     bottom: 1%;
     right: 2%;
     gap: 20px;
-
-    @media screen and (max-width: 750px) {
-      display: none;
-    }
 
     a {
       svg {
