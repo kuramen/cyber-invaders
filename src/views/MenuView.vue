@@ -75,6 +75,7 @@ main {
         line-height: 100%;
         top: 50%;
         transform: translateY(-50%);
+        font-family: "Arial Black", serif;
       }
 
       &::before {
