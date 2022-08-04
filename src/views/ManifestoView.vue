@@ -7,6 +7,7 @@ main
       v-dialog
       :data-text="(paragraphIndex <= activeParagraphIndex && sectionIndex === activeSectionIndex) ? paragraph.text : ''"
       :data-displayed="paragraph.displayed"
+      @click="handleControl('a')"
     )
 </template>
 
@@ -88,10 +89,6 @@ const sections = ref([
     paragraphs: [
       {
         text: "The 3 paths are not part of the same story. Once your 1st path is selected, only a special NFT will give you the possibility to change path. This NFT is a time travel zapper, it is single use and will be minable only when you have completed your 1st path. Don't worry, it will also be possible to get it in the secondary market places.",
-        displayed: false,
-      },
-      {
-        text: "Those who have managed to gather the three parts of the ship will have the possibility to choose the destiny of their Cyber Invaders. Three mutations will be offered, which will remain secret until one of you manages to unlock it. Once again, the mint is not the only way to get a ship part, it is also possible to buy them on the secondary market.",
         displayed: false,
       },
     ],

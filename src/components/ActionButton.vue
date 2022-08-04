@@ -23,13 +23,20 @@ button {
   transform: rotate(-15deg);
   cursor: pointer;
   position: relative;
+  text-decoration: none;
   user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 
   &.a,
   &.b {
     background-color: $game-boy-primary-button-color;
     border-radius: 50%;
     height: $button-size;
+
+    &:active {
+      background-color: darken($game-boy-primary-button-color, 10%);
+    }
 
     label {
       font-size: 23px;
@@ -46,6 +53,10 @@ button {
     background-color: $game-boy-secondary-button-color;
     border-radius: calc($button-size / 5);
     height: calc($button-size / 3);
+
+    &:active {
+      background-color: darken($game-boy-secondary-button-color, 10%);
+    }
 
     label {
       font-size: 14px;

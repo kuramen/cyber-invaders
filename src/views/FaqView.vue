@@ -2,7 +2,7 @@
 main
   .questions
     .cyber-dialog
-      p(v-dialog :data-text="cyberSpeech" :data-displayed="cyberSpeechIsDisplayed")
+      p(v-dialog :data-text="cyberSpeech" :data-displayed="cyberSpeechIsDisplayed" @click="handleControl('a')")
     .cyber-invader
       img(alt="cyber-invader" src="@/assets/img/cyber-invader.png")
   .dialog
@@ -10,6 +10,8 @@ main
       li(
         v-for="(dialog, index) in dialogs"
         :class="{ active: index === activeQuestionIndex }"
+        @mouseover="activeQuestionIndex = index"
+        @click="handleControl('a')"
       ) {{ dialog.question }}
     p.response(
       v-show="!isCyberAskingQuestion"
@@ -17,6 +19,7 @@ main
       :data-text="answer"
       :data-displayed="isCyberAskingQuestion || answerIsDisplayed"
       :class="{ large: answer.length > 290 }"
+      @click="handleControl('a')"
     )
 </template>
 

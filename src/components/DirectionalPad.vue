@@ -43,7 +43,14 @@ export default {
     width: $button-size;
     height: $button-size;
     cursor: pointer;
+    text-decoration: none;
     user-select: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+
+    &:active {
+      background-color: darken($game-boy-secondary-button-color, 10%);
+    }
 
     &.center {
       left: $button-size;
